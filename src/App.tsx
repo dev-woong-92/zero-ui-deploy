@@ -1,466 +1,300 @@
 // @ts-nocheck
 import React from "react";
 
-// ── AIInsight Component (from library) ─────────────────────────────────────
-const AIInsight = () => (
-  <div className="flex flex-col" style={{ gap: "10px", width: "358px" }}>
-    <div className="flex flex-col items-center justify-center w-full">
-      <div className="relative overflow-hidden rounded-xl">
-        <div className="absolute inset-0 z-0 overflow-hidden rounded-xl">
-          <div
-            className="rounded-xl"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)",
-              opacity: 0.3,
-              width: "358px",
-              height: "337px",
-            }}
-          />
-          <div
-            className="rounded-xl"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)",
-              opacity: 0.64,
-              width: "358px",
-              height: "337px",
-            }}
-          />
-          <div
-            className="rounded-xl"
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)",
-              width: "358px",
-              height: "337px",
-            }}
-          />
-        </div>
-        <div
-          className="flex flex-col bg-[#ffffff] rounded-xl"
-          style={{
-            position: "relative",
-            zIndex: 10,
-            gap: "10px",
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            paddingLeft: "16px",
-            paddingRight: "16px",
-            width: "358px",
-          }}
-        >
-          <div
-            className="flex flex-col gap-3"
-            style={{ position: "relative", zIndex: 10, width: "326px" }}
-          >
-            <div className="flex flex-col gap-1 w-full">
-              <div className="flex items-center gap-1 w-full">
-                <span className="text-[#1a1a1e] font-bold text-base">
-                  ✨ AI 인사이트
-                </span>
-              </div>
-              <p className="text-[#575f6c] text-sm leading-5">
-                나의 이력서를 기반으로 맞춤 채용 정보를 분석해 드립니다.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 w-full">
-              {[
-                { label: "직무 적합도", value: 87, color: "#ff74ac" },
-                { label: "경험 매칭률", value: 72, color: "#feab3e" },
-                { label: "스킬 일치도", value: 94, color: "#7c6cf2" },
-              ].map(
-                (item: { label: string; value: number; color: string }, i: number) => (
-                  <div key={i} className="flex flex-col gap-1">
-                    <div className="flex justify-between items-center">
-                      <span className="text-[#575f6c] text-xs font-medium">
-                        {item.label}
-                      </span>
-                      <span
-                        className="text-xs font-bold"
-                        style={{ color: item.color }}
-                      >
-                        {item.value}%
-                      </span>
+// =====================
+// AIInsight Component (from DB)
+// =====================
+function AIInsight() {
+  return (
+    <div className="flex flex-col" style={{ gap: "10px", width: "358px" }}>
+      <div className="flex flex-col items-center justify-center w-full">
+        <div className="relative overflow-hidden rounded-xl">
+          <div className="absolute inset-0 z-0 overflow-hidden rounded-xl">
+            <div className="rounded-xl" style={{ position: "absolute", inset: 0, background: "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)", opacity: 0.3, width: "358px", height: "337px" }} />
+            <div className="rounded-xl" style={{ position: "absolute", inset: 0, background: "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)", opacity: 0.64, width: "358px", height: "337px" }} />
+            <div className="rounded-xl" style={{ position: "absolute", inset: 0, background: "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)", width: "358px", height: "337px" }} />
+          </div>
+          <div className="flex flex-col bg-[#ffffff] rounded-xl" style={{ position: "relative", zIndex: 10, gap: "10px", paddingTop: "20px", paddingBottom: "20px", paddingLeft: "16px", paddingRight: "16px", width: "358px" }}>
+            <div className="flex flex-col gap-3" style={{ position: "relative", zIndex: 10, width: "326px" }}>
+              <div className="flex flex-col gap-1 w-full">
+                <div className="flex items-center gap-1 w-full">
+                  <div className="flex items-center justify-center gap-2">
+                    <div style={{ position: "relative", zIndex: 10, width: "16px", height: "16px" }}>
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.5 2.5L7.5 5.5C7.7 6.1 8.2 6.6 8.8 6.8L11.8 7.8C12.4 8 12.4 8.8 11.8 9L8.8 10C8.2 10.2 7.7 10.7 7.5 11.3L6.5 14.3C6.3 14.9 5.5 14.9 5.3 14.3L4.3 11.3C4.1 10.7 3.6 10.2 3 10L0 9C-0.6 8.8 -0.6 8 0 7.8L3 6.8C3.6 6.6 4.1 6.1 4.3 5.5L5.3 2.5C5.5 1.9 6.3 1.9 6.5 2.5Z" fill="url(#grad1)" />
+                        <path d="M13 0.5L13.5 2C13.6 2.4 13.9 2.7 14.3 2.8L15.8 3.3C16.2 3.4 16.2 4 15.8 4.1L14.3 4.6C13.9 4.7 13.6 5 13.5 5.4L13 6.9C12.9 7.3 12.3 7.3 12.2 6.9L11.7 5.4C11.6 5 11.3 4.7 10.9 4.6L9.4 4.1C9 4 9 3.4 9.4 3.3L10.9 2.8C11.3 2.7 11.6 2.4 11.7 2L12.2 0.5C12.3 0.1 12.9 0.1 13 0.5Z" fill="url(#grad2)" />
+                        <defs>
+                          <linearGradient id="grad1" x1="0" y1="0" x2="12" y2="16" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="#ff74ac" />
+                            <stop offset="1" stopColor="#feab3e" />
+                          </linearGradient>
+                          <linearGradient id="grad2" x1="9" y1="0" x2="16" y2="8" gradientUnits="userSpaceOnUse">
+                            <stop stopColor="#ff74ac" />
+                            <stop offset="1" stopColor="#feab3e" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
                     </div>
-                    <div className="w-full bg-[#f1f2f4] rounded-full h-1.5">
-                      <div
-                        className="h-1.5 rounded-full"
-                        style={{
-                          width: `${item.value}%`,
-                          background: item.color,
-                        }}
-                      />
-                    </div>
+                    <span className="font-bold text-sm" style={{ background: "linear-gradient(90deg, #ff74ac 0%, #feab3e 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>AI 인사이트</span>
                   </div>
-                )
-              )}
+                </div>
+                <span className="text-[#1a1a1e] font-bold" style={{ fontSize: "17px", lineHeight: "25px" }}>오늘의 채용 트렌드</span>
+              </div>
+              <div className="flex flex-col gap-2 w-full">
+                {[
+                  { tag: "IT·개발", text: "풀스택 개발자 채용이 전월 대비 23% 증가했습니다." },
+                  { tag: "디자인", text: "UI/UX 디자이너 수요가 꾸준히 늘고 있습니다." },
+                  { tag: "마케팅", text: "데이터 마케터 채용이 빠르게 증가 중입니다." },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2 w-full">
+                    <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full shrink-0" style={{ background: "linear-gradient(90deg, #fff0f7 0%, #fff8ec 100%)", color: "#ff74ac" }}>{item.tag}</span>
+                    <span className="text-[#575f6c] text-sm" style={{ lineHeight: "20px" }}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <button
-              className="w-full rounded-lg py-2.5 text-sm font-semibold text-white"
-              style={{
-                background:
-                  "linear-gradient(90deg, #ff74ac 0%, #feab3e 100%)",
-              }}
-            >
-              AI 맞춤 채용 보기
-            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+}
 
-// ── Carousel ───────────────────────────────────────────────────────────────
-const cards = [
-  { title: "Product Designer", company: "야놀자", dday: "D-11", tags: ["합격축하금", "경력 2년↑"] },
-  { title: "UX Researcher", company: "카카오", dday: "D-5", tags: ["신입가능", "재택근무"] },
-  { title: "UI Designer", company: "네이버", dday: "D-20", tags: ["합격축하금", "경력 3년↑"] },
-  { title: "Brand Designer", company: "쿠팡", dday: "D-3", tags: ["신입가능"] },
-  { title: "Motion Designer", company: "크래프톤", dday: "D-7", tags: ["합격축하금", "경력 1년↑"] },
+// =====================
+// CardTest Component (from DB) — adapted to accept props for carousel
+// =====================
+interface CardTestProps {
+  title: string;
+  company: string;
+  dday: string;
+  imageSrc?: string;
+  description: string;
+}
+
+function CardTest({ title, company, dday, description }: CardTestProps) {
+  return (
+    <div className="flex flex-col justify-center gap-3 p-4 bg-[#ffffff] rounded-[10px] shrink-0" style={{ borderWidth: "1px", borderStyle: "solid", borderColor: "#e6e8ea", width: "358px" }}>
+      <div className="w-full h-[180px] rounded-lg overflow-hidden bg-[#f6f7f8] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-2 text-[#c2c6cd]">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="8" fill="#e6e8ea" />
+            <path d="M12 28L18 20L22 24L26 18L30 28H12Z" fill="#c2c6cd" />
+            <circle cx="16" cy="16" r="3" fill="#c2c6cd" />
+          </svg>
+          <span className="text-xs">{description}</span>
+        </div>
+      </div>
+      <div className="flex justify-between gap-2 w-full">
+        <div className="flex flex-col w-full" style={{ gap: "2px" }}>
+          <span className="text-[#1a1a1e] font-semibold w-full" style={{ fontSize: "17px", lineHeight: "25px" }}>{title}</span>
+          <div className="flex items-center gap-2 w-full">
+            <span className="text-[#575f6c] text-sm font-normal" style={{ lineHeight: "20px" }}>{company}</span>
+            <span className="text-[#f37676] text-[11px] font-semibold" style={{ lineHeight: "15px" }}>{dday}</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex gap-1 w-full" style={{ height: "20px" }}>
+        <div className="flex items-center justify-center rounded" style={{ gap: "2px", paddingTop: "2px", paddingBottom: "2px", paddingLeft: "6px", paddingRight: "6px", borderWidth: "1px", borderStyle: "solid", borderColor: "#e6e8ea", height: "20px" }}>
+          <span className="text-[#c2c6cd] text-[11px] font-semibold" style={{ lineHeight: "18px" }}>AD</span>
+        </div>
+        <div className="flex items-center justify-center bg-[#faf9ec] rounded" style={{ gap: "2px", paddingTop: "2px", paddingBottom: "2px", paddingLeft: "6px", paddingRight: "6px", height: "20px" }}>
+          <span className="text-[#f0b500] text-[11px] font-semibold" style={{ lineHeight: "18px" }}>합격축하금</span>
+        </div>
+        <div className="flex items-center justify-center bg-[#f6f7f8] rounded" style={{ gap: "2px", paddingTop: "2px", paddingBottom: "2px", paddingLeft: "6px", paddingRight: "6px", height: "20px" }}>
+          <span className="text-[#afb5be] text-[11px] font-semibold" style={{ lineHeight: "18px" }}>경력 2년↑</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// =====================
+// Dummy Card Data
+// =====================
+const cardData: CardTestProps[] = [
+  { title: "Frontend Developer", company: "카카오", dday: "D-3", description: "React / TypeScript", imageSrc: "" },
+  { title: "Product Designer", company: "야놀자", dday: "D-11", description: "UI/UX 디자인", imageSrc: "" },
+  { title: "Backend Engineer", company: "네이버", dday: "D-7", description: "Java / Spring", imageSrc: "" },
+  { title: "Data Scientist", company: "라인", dday: "D-5", description: "Python / ML", imageSrc: "" },
+  { title: "DevOps Engineer", company: "쿠팡", dday: "D-14", description: "AWS / Docker", imageSrc: "" },
+  { title: "iOS Developer", company: "배달의민족", dday: "D-9", description: "Swift / SwiftUI", imageSrc: "" },
+  { title: "Android Developer", company: "토스", dday: "D-2", description: "Kotlin / Jetpack", imageSrc: "" },
+  { title: "Full Stack Developer", company: "당근마켓", dday: "D-6", description: "Node.js / React", imageSrc: "" },
+  { title: "PM / 기획자", company: "크래프톤", dday: "D-20", description: "서비스 기획", imageSrc: "" },
+  { title: "UX Researcher", company: "무신사", dday: "D-15", description: "사용자 리서치", imageSrc: "" },
+  { title: "Cloud Architect", company: "SK텔레콤", dday: "D-8", description: "Azure / GCP", imageSrc: "" },
+  { title: "Security Engineer", company: "삼성SDS", dday: "D-12", description: "보안 취약점 분석", imageSrc: "" },
 ];
 
-const Carousel = () => {
+// =====================
+// Carousel Component
+// =====================
+function CardCarousel() {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [dragStartX, setDragStartX] = React.useState<number | null>(null);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [dragOffset, setDragOffset] = React.useState(0);
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const isDragging = React.useRef(false);
-  const startX = React.useRef(0);
-  const scrollLeft = React.useRef(0);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    isDragging.current = true;
-    startX.current = e.pageX - containerRef.current.offsetLeft;
-    scrollLeft.current = containerRef.current.scrollLeft;
-    containerRef.current.style.cursor = "grabbing";
+  const CARD_WIDTH = 358;
+  const GAP = 16;
+  const CARDS_PER_VIEW = 4;
+  const STEP = CARD_WIDTH + GAP;
+  const maxIndex = cardData.length - CARDS_PER_VIEW;
+  const totalDots = maxIndex + 1;
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setDragStartX(e.clientX);
+    setIsDragging(true);
+    setDragOffset(0);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging.current || !containerRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - containerRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.2;
-    containerRef.current.scrollLeft = scrollLeft.current - walk;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || dragStartX === null) return;
+    setDragOffset(e.clientX - dragStartX);
   };
 
   const handleMouseUp = () => {
-    isDragging.current = false;
-    if (!containerRef.current) return;
-    containerRef.current.style.cursor = "grab";
+    if (!isDragging || dragStartX === null) return;
+    if (dragOffset < -50 && currentIndex < maxIndex) {
+      setCurrentIndex((prev) => prev + 1);
+    } else if (dragOffset > 50 && currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1);
+    }
+    setIsDragging(false);
+    setDragStartX(null);
+    setDragOffset(0);
   };
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    startX.current = e.touches[0].pageX - containerRef.current.offsetLeft;
-    scrollLeft.current = containerRef.current.scrollLeft;
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setDragStartX(e.touches[0].clientX);
+    setIsDragging(true);
+    setDragOffset(0);
   };
 
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const x = e.touches[0].pageX - containerRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.2;
-    containerRef.current.scrollLeft = scrollLeft.current - walk;
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || dragStartX === null) return;
+    setDragOffset(e.touches[0].clientX - dragStartX);
   };
+
+  const handleTouchEnd = () => {
+    if (!isDragging || dragStartX === null) return;
+    if (dragOffset < -50 && currentIndex < maxIndex) {
+      setCurrentIndex((prev) => prev + 1);
+    } else if (dragOffset > 50 && currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1);
+    }
+    setIsDragging(false);
+    setDragStartX(null);
+    setDragOffset(0);
+  };
+
+  const translateX = -(currentIndex * STEP) + (isDragging ? dragOffset : 0);
 
   return (
-    <div
-      ref={containerRef}
-      className="flex gap-3 overflow-x-auto select-none"
-      style={{
-        cursor: "grab",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-        paddingBottom: "4px",
-      }}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-    >
-      {cards.map((card: { title: string; company: string; dday: string; tags: string[] }, i: number) => (
+    <div className="flex flex-col gap-4 w-full">
+      <div
+        className="overflow-hidden w-full cursor-grab active:cursor-grabbing select-none"
+        ref={containerRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
-          key={i}
-          className="flex flex-col justify-center gap-3 p-4 bg-white rounded-[10px] flex-shrink-0"
+          className="flex"
           style={{
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderColor: "#e6e8ea",
-            width: "280px",
+            gap: `${GAP}px`,
+            transform: `translateX(${translateX}px)`,
+            transition: isDragging ? "none" : "transform 0.3s ease",
           }}
         >
-          <div className="flex flex-col" style={{ gap: "2px" }}>
-            <span
-              className="text-[#1a1a1e] font-semibold"
-              style={{ fontSize: "17px", lineHeight: "25px" }}
-            >
-              {card.title}
-            </span>
-            <div className="flex items-center gap-2">
-              <span className="text-[#575f6c] text-sm font-normal">
-                {card.company}
-              </span>
-              <span className="text-[#f37676] text-[11px] font-semibold">
-                {card.dday}
-              </span>
+          {cardData.map((card, i) => (
+            <div key={i} className="shrink-0">
+              <CardTest {...card} />
             </div>
-          </div>
-          <div className="flex gap-1" style={{ height: "20px" }}>
-            <div
-              className="flex items-center justify-center rounded"
-              style={{
-                padding: "2px 6px",
-                borderWidth: "1px",
-                borderStyle: "solid",
-                borderColor: "#e6e8ea",
-                height: "20px",
-              }}
-            >
-              <span className="text-[#c2c6cd] text-[11px] font-semibold">
-                AD
-              </span>
-            </div>
-            {card.tags.map((tag: string, j: number) => (
-              <div
-                key={j}
-                className="flex items-center justify-center bg-[#f6f7f8] rounded"
-                style={{ padding: "2px 6px", height: "20px" }}
-              >
-                <span className="text-[#afb5be] text-[11px] font-semibold">
-                  {tag}
-                </span>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
+
+      {/* Pagination Dots */}
+      <div className="flex items-center justify-center gap-2">
+        {Array.from({ length: totalDots }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === currentIndex ? "20px" : "8px",
+              height: "8px",
+              backgroundColor: i === currentIndex ? "#1a1a1e" : "#e6e8ea",
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
-// ── Main App ───────────────────────────────────────────────────────────────
+// =====================
+// Main App
+// =====================
 export default function App() {
-  const navItems = ["채용정보", "기업정보", "이력서", "연봉정보", "커뮤니티", "인재풀"];
+  const navItems = ["채용공고", "기업정보", "커뮤니티", "마이페이지"];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f7f8fa]">
-      {/* ── Header ── */}
-      <header className="bg-white border-b border-[#e6e8ea] sticky top-0 z-50">
-        {/* Top util bar */}
-        <div className="bg-[#f7f8fa] border-b border-[#e6e8ea]">
-          <div className="max-w-[1200px] mx-auto px-4 h-8 flex items-center justify-end gap-4">
-            {["로그인", "회원가입", "기업서비스"].map((item: string) => (
+    <div className="min-h-screen flex flex-col bg-[#f6f7f8]">
+
+      {/* Fixed Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#e6e8ea]" style={{ height: "60px" }}>
+        <div className="max-w-[1480px] mx-auto px-6 h-full flex items-center justify-between">
+          <span className="text-[#1a1a1e] font-bold text-xl tracking-tight select-none">JobKorea</span>
+          <nav className="flex items-center gap-8">
+            {navItems.map((item) => (
               <a
                 key={item}
                 href="#"
-                className="text-[#575f6c] text-xs hover:text-[#347aff] transition-colors"
+                className="text-[#1a1a1e] text-sm font-medium hover:text-[#ff74ac] transition-colors duration-200"
+                onClick={(e) => e.preventDefault()}
               >
                 {item}
               </a>
             ))}
-          </div>
-        </div>
-        {/* Main nav */}
-        <div className="max-w-[1200px] mx-auto px-4">
-          <div className="flex items-center h-[60px] gap-8">
-            {/* Logo */}
-            <div className="flex items-center gap-1 flex-shrink-0">
-              <div
-                className="rounded font-extrabold text-white text-xl flex items-center justify-center"
-                style={{
-                  background: "linear-gradient(135deg, #347aff 0%, #1a5cdb 100%)",
-                  width: "36px",
-                  height: "36px",
-                }}
-              >
-                J
-              </div>
-              <span className="text-[#1a1a1e] font-extrabold text-xl tracking-tight">
-                잡코리아
-              </span>
-            </div>
-            {/* Nav items */}
-            <nav className="flex items-center gap-1 flex-1">
-              {navItems.map((item: string) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="px-3 py-2 text-[#1a1a1e] text-sm font-medium hover:text-[#347aff] hover:bg-[#f0f5ff] rounded-md transition-colors whitespace-nowrap"
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-            {/* CTA */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <button className="px-4 py-2 text-sm font-semibold text-[#347aff] border border-[#347aff] rounded-lg hover:bg-[#f0f5ff] transition-colors">
-                로그인
-              </button>
-              <button
-                className="px-4 py-2 text-sm font-semibold text-white rounded-lg transition-colors"
-                style={{ background: "#347aff" }}
-              >
-                회원가입
-              </button>
-            </div>
-          </div>
-          {/* Search bar */}
-          <div className="pb-4">
-            <div className="flex items-center bg-[#f7f8fa] border border-[#e6e8ea] rounded-xl overflow-hidden h-12 max-w-[600px]">
-              <svg
-                className="ml-4 flex-shrink-0 text-[#afb5be]"
-                width="18"
-                height="18"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <input
-                type="text"
-                placeholder="직무, 회사, 키워드를 입력해 주세요"
-                className="flex-1 px-3 bg-transparent text-sm text-[#1a1a1e] placeholder-[#afb5be] outline-none"
-              />
-              <button
-                className="h-full px-5 text-sm font-semibold text-white flex-shrink-0"
-                style={{ background: "#347aff" }}
-              >
-                검색
-              </button>
-            </div>
-          </div>
+          </nav>
         </div>
       </header>
 
-      {/* ── Main Content ── */}
-      <main className="flex-1">
-        <div className="max-w-[1200px] mx-auto px-4 py-10">
-          <div className="flex justify-center">
-            {/* Single column content */}
-            <div className="flex flex-col gap-6" style={{ width: "358px" }}>
-              {/* Section title */}
-              <div className="flex flex-col gap-1">
-                <h2 className="text-[#1a1a1e] text-xl font-bold">
-                  AI 맞춤 채용 추천
-                </h2>
-                <p className="text-[#575f6c] text-sm">
-                  나에게 딱 맞는 채용 정보를 AI가 분석해 드려요
-                </p>
-              </div>
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col items-center" style={{ paddingTop: "80px", paddingBottom: "40px" }}>
+        <div className="w-full max-w-[1480px] px-6 flex flex-col gap-8">
 
-              {/* AIInsight Component */}
-              <AIInsight />
+          {/* AIInsight Section */}
+          <section className="flex flex-col gap-3">
+            <h2 className="text-[#1a1a1e] font-bold text-lg">AI 인사이트</h2>
+            <AIInsight />
+          </section>
 
-              {/* CardTest Carousel */}
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-[#1a1a1e] text-base font-bold">
-                    추천 공고
-                  </h3>
-                  <a
-                    href="#"
-                    className="text-[#347aff] text-xs font-medium hover:underline"
-                  >
-                    전체보기
-                  </a>
-                </div>
-                <Carousel />
-              </div>
-            </div>
-          </div>
+          {/* CardTest Carousel Section */}
+          <section className="flex flex-col gap-3">
+            <h2 className="text-[#1a1a1e] font-bold text-lg">추천 채용공고</h2>
+            <CardCarousel />
+          </section>
+
         </div>
       </main>
 
-      {/* ── Footer ── */}
-      <footer className="bg-[#2d3540] text-white mt-auto">
-        {/* Links section */}
-        <div className="max-w-[1200px] mx-auto px-4 py-10">
-          <div className="grid grid-cols-5 gap-8">
-            {[
-              {
-                title: "채용정보",
-                links: ["직종별채용", "지역별채용", "업종별채용", "신입채용", "경력채용"],
-              },
-              {
-                title: "기업정보",
-                links: ["기업검색", "기업리뷰", "연봉정보", "면접후기", "기업뉴스"],
-              },
-              {
-                title: "이력서",
-                links: ["이력서작성", "포트폴리오", "자소서", "이력서양식", "이력서첨삭"],
-              },
-              {
-                title: "커뮤니티",
-                links: ["취업토크", "자유게시판", "합격스펙", "면접질문", "직장인톡"],
-              },
-              {
-                title: "고객센터",
-                links: ["공지사항", "FAQ", "1:1문의", "이용약관", "개인정보처리방침"],
-              },
-            ].map((col: { title: string; links: string[] }) => (
-              <div key={col.title} className="flex flex-col gap-3">
-                <span className="text-white text-sm font-bold">{col.title}</span>
-                <div className="flex flex-col gap-2">
-                  {col.links.map((link: string) => (
-                    <a
-                      key={link}
-                      href="#"
-                      className="text-[#8d95a0] text-xs hover:text-white transition-colors"
-                    >
-                      {link}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-[#404a57]">
-          <div className="max-w-[1200px] mx-auto px-4 py-5 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div
-                className="rounded font-extrabold text-white text-sm flex items-center justify-center"
-                style={{
-                  background: "linear-gradient(135deg, #347aff 0%, #1a5cdb 100%)",
-                  width: "24px",
-                  height: "24px",
-                }}
-              >
-                J
-              </div>
-              <span className="text-[#8d95a0] text-xs">
-                © 2026 잡코리아 Co., Ltd. All rights reserved.
-              </span>
-            </div>
-            <div className="flex items-center gap-4">
-              {["이용약관", "개인정보처리방침", "사업자정보확인"].map((item: string) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-[#8d95a0] text-xs hover:text-white transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
-          </div>
+      {/* Footer */}
+      <footer className="bg-white border-t border-[#e6e8ea]">
+        <div className="max-w-[1480px] mx-auto px-6 py-5 flex items-center justify-center">
+          <span className="text-[#afb5be] text-xs">
+            © {new Date().getFullYear()} JobKorea Inc. All rights reserved.
+          </span>
         </div>
       </footer>
+
     </div>
   );
 }
