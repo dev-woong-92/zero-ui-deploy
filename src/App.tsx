@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function App() {
   const [currentIndex, setCurrentIndex] = React.useState(0);
 
