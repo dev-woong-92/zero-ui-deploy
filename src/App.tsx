@@ -1,549 +1,246 @@
 // @ts-nocheck
 import React from "react";
 
-// =====================
-// AIInsight Component (DB 컴포넌트 - 그대로 사용)
-// =====================
-function AIInsight() {
+const monthlyData = [
+  { month: "1월", sales: 4200000 },
+  { month: "2월", sales: 3800000 },
+  { month: "3월", sales: 5100000 },
+  { month: "4월", sales: 4700000 },
+  { month: "5월", sales: 6200000 },
+  { month: "6월", sales: 5800000 },
+  { month: "7월", sales: 7100000 },
+  { month: "8월", sales: 6500000 },
+  { month: "9월", sales: 5900000 },
+  { month: "10월", sales: 8200000 },
+  { month: "11월", sales: 9500000 },
+  { month: "12월", sales: 11000000 },
+];
+
+function formatCurrency(value: number): string {
+  if (value >= 100000000) return `${(value / 100000000).toFixed(1)}억원`;
+  if (value >= 10000) return `${(value / 10000).toFixed(0)}만원`;
+  return `${value.toLocaleString()}원`;
+}
+
+interface StatCardProps {
+  title: string;
+  value: string;
+  subtext: string;
+  icon: React.ReactNode;
+  trend: number;
+}
+
+function StatCard({ title, value, subtext, icon, trend }: StatCardProps) {
+  const isPositive = trend >= 0;
   return (
-    <div className="flex flex-col" style={{ gap: "10px", width: "358px" }}>
-      <div className="flex flex-col items-center justify-center w-full">
-        <div className="relative overflow-hidden rounded-xl">
-          <div className="absolute inset-0 z-0 overflow-hidden rounded-xl">
-            <div
-              className="rounded-xl"
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)",
-                opacity: 0.3,
-                width: "358px",
-                height: "337px",
-              }}
-            />
-            <div
-              className="rounded-xl"
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)",
-                opacity: 0.64,
-                width: "358px",
-                height: "337px",
-              }}
-            />
-            <div
-              className="rounded-xl"
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(179deg, transparent 0%, #ff74ac 30%, #feab3e 70%, transparent 100%)",
-                width: "358px",
-                height: "337px",
-              }}
-            />
-          </div>
-          <div
-            className="flex flex-col bg-[#ffffff] rounded-xl"
-            style={{
-              position: "relative",
-              zIndex: 10,
-              gap: "10px",
-              paddingTop: "20px",
-              paddingBottom: "20px",
-              paddingLeft: "16px",
-              paddingRight: "16px",
-              width: "358px",
-            }}
-          >
-            <div
-              className="flex flex-col gap-3"
-              style={{ position: "relative", zIndex: 10, width: "326px" }}
-            >
-              <div className="flex flex-col gap-1 w-full">
-                <div className="flex items-center gap-1 w-full">
-                  <div className="flex items-center justify-center gap-2">
-                    <div
-                      style={{
-                        position: "relative",
-                        zIndex: 10,
-                        width: "16px",
-                        height: "16px",
-                      }}
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <circle cx="8" cy="8" r="8" fill="url(#ai_grad)" />
-                        <path
-                          d="M5 8.5L7 10.5L11 6"
-                          stroke="white"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <defs>
-                          <linearGradient
-                            id="ai_grad"
-                            x1="0"
-                            y1="0"
-                            x2="16"
-                            y2="16"
-                            gradientUnits="userSpaceOnUse"
-                          >
-                            <stop stopColor="#ff74ac" />
-                            <stop offset="1" stopColor="#feab3e" />
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                    </div>
-                    <span
-                      className="font-semibold"
-                      style={{
-                        fontSize: "13px",
-                        lineHeight: "18px",
-                        background:
-                          "linear-gradient(90deg, #ff74ac 0%, #feab3e 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                      }}
-                    >
-                      AI Insight
-                    </span>
-                  </div>
-                </div>
-                <span
-                  className="text-[#1a1a1e] font-bold w-full"
-                  style={{ fontSize: "18px", lineHeight: "26px" }}
-                >
-                  AI가 분석한 핵심 인사이트
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 w-full">
-                {[
-                  "사용자 경험을 극대화하는 UI 패턴을 자동으로 감지하고 추천합니다.",
-                  "디자인 시스템과 컴포넌트의 일관성을 실시간으로 검증합니다.",
-                  "접근성 및 성능 최적화를 위한 구체적인 개선안을 제시합니다.",
-                ].map((text, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <div
-                      className="rounded-full flex-shrink-0 mt-1"
-                      style={{
-                        width: "6px",
-                        height: "6px",
-                        background:
-                          "linear-gradient(135deg, #ff74ac 0%, #feab3e 100%)",
-                      }}
-                    />
-                    <span
-                      className="text-[#575f6c]"
-                      style={{ fontSize: "14px", lineHeight: "20px" }}
-                    >
-                      {text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col gap-4">
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-medium text-gray-500">{title}</span>
+        <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+          {icon}
         </div>
+      </div>
+      <div>
+        <div className="text-2xl font-bold text-gray-900">{value}</div>
+        <div className="text-xs text-gray-400 mt-1">{subtext}</div>
+      </div>
+      <div className={`flex items-center gap-1 text-sm font-medium ${isPositive ? "text-emerald-500" : "text-red-500"}`}>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          {isPositive ? (
+            <path d="M7 2L12 8H2L7 2Z" fill="currentColor" />
+          ) : (
+            <path d="M7 12L12 6H2L7 12Z" fill="currentColor" />
+          )}
+        </svg>
+        <span>{isPositive ? "+" : ""}{trend}% 전월 대비</span>
       </div>
     </div>
   );
 }
 
-// =====================
-// CardTest Component (DB 컴포넌트 - 그대로 사용)
-// =====================
-function CardTest() {
-  return (
-    <div
-      className="flex flex-col justify-center gap-3 p-4 bg-[#ffffff] rounded-[10px]"
-      style={{
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "#e6e8ea",
-        width: "358px",
-      }}
-    >
-      <div className="flex justify-between gap-2 w-full">
-        <div className="flex flex-col w-full" style={{ gap: "2px" }}>
-          <span
-            className="text-[#1a1a1e] font-semibold w-full"
-            style={{ fontSize: "17px", lineHeight: "25px" }}
-          >
-            Product Designer
-          </span>
-          <div className="flex items-center gap-2 w-full">
-            <span
-              className="text-[#575f6c] text-sm font-normal"
-              style={{ lineHeight: "20px" }}
-            >
-              야놀자
-            </span>
-            <span
-              className="text-[#f37676] text-[11px] font-semibold"
-              style={{ lineHeight: "15px" }}
-            >
-              D-11
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-1 w-full" style={{ height: "20px" }}>
-        <div
-          className="flex items-center justify-center rounded"
-          style={{
-            gap: "2px",
-            paddingTop: "2px",
-            paddingBottom: "2px",
-            paddingLeft: "6px",
-            paddingRight: "6px",
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderColor: "#e6e8ea",
-            height: "20px",
-          }}
-        >
-          <span
-            className="text-[#c2c6cd] text-[11px] font-semibold"
-            style={{ lineHeight: "18px" }}
-          >
-            AD
-          </span>
-        </div>
-        <div
-          className="flex items-center justify-center bg-[#faf9ec] rounded"
-          style={{
-            gap: "2px",
-            paddingTop: "2px",
-            paddingBottom: "2px",
-            paddingLeft: "6px",
-            paddingRight: "6px",
-            height: "20px",
-          }}
-        >
-          <span
-            className="text-[#f0b500] text-[11px] font-semibold"
-            style={{ lineHeight: "18px" }}
-          >
-            합격축하금
-          </span>
-        </div>
-        <div
-          className="flex items-center justify-center bg-[#f6f7f8] rounded"
-          style={{
-            gap: "2px",
-            paddingTop: "2px",
-            paddingBottom: "2px",
-            paddingLeft: "6px",
-            paddingRight: "6px",
-            height: "20px",
-          }}
-        >
-          <span
-            className="text-[#afb5be] text-[11px] font-semibold"
-            style={{ lineHeight: "18px" }}
-          >
-            경력 2년↑
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
+function BarChart({ data }: { data: typeof monthlyData }) {
+  const chartHeight = 200;
+  const barWidth = 32;
+  const gap = 16;
+  const maxVal = Math.max(...data.map((d) => d.sales));
+  const [hovered, setHovered] = React.useState<number | null>(null);
 
-// =====================
-// Carousel Component
-// =====================
-const TOTAL_CARDS = 20;
-
-function useCardsPerView() {
-  const getCount = () => {
-    if (typeof window === "undefined") return 3;
-    const w = window.innerWidth;
-    if (w < 640) return 1;
-    if (w < 1024) return 2;
-    if (w < 1280) return 3;
-    return 4;
-  };
-  const [count, setCount] = React.useState(getCount);
-  React.useEffect(() => {
-    const handler = () => setCount(getCount());
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-  return count;
-}
-
-function Carousel() {
-  const cardsPerView = useCardsPerView();
-  const totalGroups = Math.ceil(TOTAL_CARDS / cardsPerView);
-  const [currentGroup, setCurrentGroup] = React.useState(0);
-
-  // drag/swipe state
-  const dragStartX = React.useRef<number | null>(null);
-  const isDragging = React.useRef(false);
-  const trackRef = React.useRef<HTMLDivElement>(null);
-
-  // clamp currentGroup when cardsPerView changes
-  React.useEffect(() => {
-    setCurrentGroup((g) => Math.min(g, totalGroups - 1));
-  }, [cardsPerView, totalGroups]);
-
-  const handleDragStart = (clientX: number) => {
-    dragStartX.current = clientX;
-    isDragging.current = false;
-  };
-
-  const handleDragEnd = (clientX: number) => {
-    if (dragStartX.current === null) return;
-    const delta = dragStartX.current - clientX;
-    if (Math.abs(delta) > 40) {
-      isDragging.current = true;
-      if (delta > 0 && currentGroup < totalGroups - 1) {
-        setCurrentGroup((g) => g + 1);
-      } else if (delta < 0 && currentGroup > 0) {
-        setCurrentGroup((g) => g - 1);
-      }
-    }
-    dragStartX.current = null;
-  };
-
-  // Mouse events
-  const onMouseDown = (e: React.MouseEvent) => handleDragStart(e.clientX);
-  const onMouseUp = (e: React.MouseEvent) => handleDragEnd(e.clientX);
-  const onMouseLeave = (e: React.MouseEvent) => {
-    if (dragStartX.current !== null) handleDragEnd(e.clientX);
-  };
-
-  // Touch events
-  const onTouchStart = (e: React.TouchEvent) =>
-    handleDragStart(e.touches[0].clientX);
-  const onTouchEnd = (e: React.TouchEvent) =>
-    handleDragEnd(e.changedTouches[0].clientX);
-
-  const translateX = -(currentGroup * 100);
+  const totalWidth = data.length * (barWidth + gap) - gap;
 
   return (
-    <div className="w-full flex flex-col gap-4 items-center">
-      {/* Track wrapper */}
-      <div className="w-full overflow-hidden">
-        <div
-          ref={trackRef}
-          className="flex transition-transform duration-300 ease-in-out select-none"
-          style={{ transform: `translateX(${translateX}%)` }}
-          onMouseDown={onMouseDown}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
-          {/* Group pages */}
-          {Array.from({ length: totalGroups }).map((_, groupIdx) => (
-            <div
-              key={groupIdx}
-              className="flex gap-4 flex-shrink-0"
-              style={{ width: "100%" }}
-            >
-              {Array.from({ length: cardsPerView }).map((_, cardIdx) => {
-                const cardNum = groupIdx * cardsPerView + cardIdx;
-                if (cardNum >= TOTAL_CARDS) return null;
-                return (
-                  <div
-                    key={cardNum}
-                    className="flex-shrink-0 flex justify-center"
-                    style={{ width: `${100 / cardsPerView}%` }}
+    <div className="w-full overflow-x-auto">
+      <svg
+        viewBox={`0 0 ${totalWidth} ${chartHeight + 40}`}
+        width="100%"
+        style={{ minWidth: `${totalWidth}px` }}
+        className="overflow-visible"
+      >
+        {/* 가이드라인 */}
+        {[0, 0.25, 0.5, 0.75, 1].map((ratio) => {
+          const y = chartHeight - chartHeight * ratio;
+          return (
+            <line
+              key={ratio}
+              x1={0}
+              y1={y}
+              x2={totalWidth}
+              y2={y}
+              stroke="#f0f0f0"
+              strokeWidth={1}
+            />
+          );
+        })}
+
+        {data.map((d, i) => {
+          const barH = (d.sales / maxVal) * chartHeight;
+          const x = i * (barWidth + gap);
+          const y = chartHeight - barH;
+          const isHov = hovered === i;
+
+          return (
+            <g key={d.month}>
+              {/* 호버 배경 */}
+              <rect
+                x={x - 4}
+                y={0}
+                width={barWidth + 8}
+                height={chartHeight + 8}
+                fill={isHov ? "#f8fafc" : "transparent"}
+                rx={6}
+              />
+
+              {/* 막대 */}
+              <rect
+                x={x}
+                y={y}
+                width={barWidth}
+                height={barH}
+                rx={6}
+                fill={isHov ? "#2563eb" : "#93c5fd"}
+                style={{ transition: "fill 0.15s" }}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                className="cursor-pointer"
+              />
+
+              {/* 호버 툴팁 */}
+              {isHov && (
+                <g>
+                  <rect
+                    x={x - 12}
+                    y={y - 36}
+                    width={barWidth + 24}
+                    height={28}
+                    rx={6}
+                    fill="#1e40af"
+                  />
+                  <text
+                    x={x + barWidth / 2}
+                    y={y - 18}
+                    textAnchor="middle"
+                    fill="white"
+                    fontSize={10}
+                    fontWeight="600"
                   >
-                    <CardTest />
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      </div>
+                    {formatCurrency(d.sales)}
+                  </text>
+                </g>
+              )}
 
-      {/* Dot Indicator */}
-      <div className="flex items-center gap-2">
-        {Array.from({ length: totalGroups }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentGroup(i)}
-            className="transition-all duration-200 rounded-full focus:outline-none"
-            style={{
-              width: i === currentGroup ? "20px" : "8px",
-              height: "8px",
-              backgroundColor:
-                i === currentGroup ? "#6366f1" : "#d1d5db",
-            }}
-            aria-label={`Go to group ${i + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Card count info */}
-      <p className="text-sm text-gray-400">
-        {currentGroup * cardsPerView + 1}–
-        {Math.min((currentGroup + 1) * cardsPerView, TOTAL_CARDS)} / {TOTAL_CARDS}
-      </p>
+              {/* X축 레이블 */}
+              <text
+                x={x + barWidth / 2}
+                y={chartHeight + 20}
+                textAnchor="middle"
+                fill="#9ca3af"
+                fontSize={11}
+              >
+                {d.month}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
 
-// =====================
-// Header
-// =====================
-const NAV_ITEMS = ["Home", "About", "Services", "Pricing", "Contact"] as const;
-
-function Header() {
-  const [menuOpen, setMenuOpen] = React.useState(false);
-
-  return (
-    <header className="w-full bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm"
-            style={{
-              background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)",
-            }}
-          >
-            Z
-          </div>
-          <span className="text-xl font-bold text-gray-900">ZeroUI</span>
-        </div>
-
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {NAV_ITEMS.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors duration-150"
-            >
-              {item}
-            </a>
-          ))}
-        </nav>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden p-2 rounded-md text-gray-500 hover:bg-gray-100 focus:outline-none"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Toggle menu"
-        >
-          <svg
-            width="22"
-            height="22"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {menuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            )}
-          </svg>
-        </button>
-      </div>
-
-      {/* Mobile Nav Dropdown */}
-      {menuOpen && (
-        <div className="md:hidden border-t border-gray-100 bg-white">
-          <nav className="flex flex-col px-4 py-2">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="py-3 text-sm font-medium text-gray-700 hover:text-indigo-600 border-b border-gray-50 last:border-0 transition-colors"
-                onClick={() => setMenuOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
-  );
-}
-
-// =====================
-// Footer
-// =====================
-function Footer() {
-  return (
-    <footer className="w-full bg-gray-50 border-t border-gray-200 py-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p className="text-sm text-gray-500">
-          © {new Date().getFullYear()} ZeroUI. All rights reserved.
-        </p>
-      </div>
-    </footer>
-  );
-}
-
-// =====================
-// Main App
-// =====================
 export default function App() {
+  const totalSales = monthlyData.reduce((sum, d) => sum + d.sales, 0);
+  const totalOrders = 3842;
+  const avgOrder = Math.round(totalSales / totalOrders);
+
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
-
-      {/* Main Content */}
-      <main className="flex-1 w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col items-center gap-12">
-
-          {/* Section Title */}
-          <div className="text-center">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-              AI-Powered UI Platform
-            </h1>
-            <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto">
-              디자인에서 코드까지, AI가 함께합니다.
-            </p>
+    <div className="min-h-screen bg-gray-50">
+      {/* 헤더 */}
+      <header className="bg-white border-b border-gray-100 px-6 py-4">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">매출 대시보드</h1>
+            <p className="text-sm text-gray-400 mt-0.5">2025년 연간 현황</p>
           </div>
-
-          {/* AIInsight Component */}
-          <div className="flex justify-center w-full">
-            <AIInsight />
+          <div className="flex items-center gap-2">
+            <span className="text-xs bg-blue-50 text-blue-600 font-medium px-3 py-1.5 rounded-full">
+              실시간 업데이트
+            </span>
           </div>
+        </div>
+      </header>
 
-          {/* CardTest Carousel */}
-          <div className="w-full flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-800">
-                추천 포지션
-              </h2>
-              <span className="text-sm text-gray-400">총 {TOTAL_CARDS}개</span>
+      {/* 메인 콘텐츠 */}
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+        {/* 통계 카드 — 반응형: mobile 1열, tablet 2열, desktop 3열 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <StatCard
+            title="총 매출"
+            value={formatCurrency(totalSales)}
+            subtext="VAT 포함 기준"
+            trend={12.4}
+            icon={
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            }
+          />
+          <StatCard
+            title="총 주문 수"
+            value={`${totalOrders.toLocaleString()}건`}
+            subtext="취소 건 제외"
+            trend={8.1}
+            icon={
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            }
+          />
+          <StatCard
+            title="평균 주문액"
+            value={formatCurrency(avgOrder)}
+            subtext="주문당 평균"
+            trend={-2.3}
+            icon={
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            }
+          />
+        </div>
+
+        {/* 월별 매출 차트 */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-base font-bold text-gray-900">월별 매출 현황</h2>
+              <p className="text-xs text-gray-400 mt-0.5">2025년 1월 ~ 12월</p>
             </div>
-            <Carousel />
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-blue-300 inline-block" />
+              <span className="text-xs text-gray-500">월 매출</span>
+            </div>
           </div>
+          <BarChart data={monthlyData} />
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
